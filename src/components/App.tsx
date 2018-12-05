@@ -49,7 +49,7 @@ class App extends React.Component<ReduxType, IState> {
         const { list, loading } = this.props;
         return (
             <div style={{margin: '20px'}}>
-            <div>hejh</div>
+            <div>jjdd</div>
                 <input value={this.state.inputText} onChange={this.onInputChange}/>
                 <button onClick={this.onAddClick}>Add</button>
                 <ul>

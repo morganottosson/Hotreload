@@ -9,38 +9,28 @@ module.exports = {
     context: resolve(__dirname, 'src'),
     entry: [
         'webpack-dev-server/client?http://localhost:8080',
-        // bundle the client for webpack-dev-server
-        // and connect to the provided endpoint
         'webpack/hot/only-dev-server',
-        // bundle the client for hot reloading
-        // only- means to only hot reload for successful updates
         './index.tsx'
-        // the entry point of our app
     ],
     output: {
         filename: 'hotloader.js',
-        // the output bundle
         path: resolve(__dirname, 'dist'), 
         publicPath: '/'
-        // necessary for HMR to know where to load the hot update chunks
     },
     devtool: 'inline-source-map',
     resolve: {
-        // Add '.ts' and '.tsx' as resolvable extensions.
         extensions: [".ts", ".tsx", ".js", ".json"]
     },
     devServer: {
+        stats: {
+            warnings: false
+        },
         port: '8080',
-        // Change it if other port needs to be used
         hot: true,
-        // enable HMR on the server
         noInfo: true,
         quiet: false,
-        // minimize the output to terminal.
         contentBase: resolve(__dirname, 'src'),
-        // match the output path
         publicPath: '/'
-        // match the output `publicPath`
     },
     module: {
         rules: [
@@ -57,13 +47,6 @@ module.exports = {
                         loader: 'ts-loader',
                         options: {
                             transpileOnly: true,
-                            getCustomTransformers: () => ({
-                              before: [ tsImportPluginFactory({
-                                libraryName: 'antd',
-                                libraryDirectory: 'es',
-                                style: 'css',
-                              }) ]
-                            }),
                             compilerOptions: {
                               module: 'es2015'
                             }
