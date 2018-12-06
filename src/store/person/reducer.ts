@@ -1,7 +1,7 @@
 import { Constants, PersonActions, IPersonState } from './types';
 
 const init: IPersonState = {
-    form: null,
+    form: {},
     loading: false
 };
 

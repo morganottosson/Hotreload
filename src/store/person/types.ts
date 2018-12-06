@@ -8,7 +8,7 @@ export interface IPersonState {
 
 export enum Constants {
     SENDFORM = 'SENDFORM',
-    SET_LOADING = 'SET_LOADING',
+    SET_LOADING = 'SET_LOADING'
 }
 
 export type PersonActions = ActionType<typeof actions>;

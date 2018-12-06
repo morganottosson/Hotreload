@@ -5,10 +5,11 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import * as actions from '../store/person/actions';
 import { PersonActions } from '../store/person/types';
+import Input from './Input';
 
 const mapDispatcherToProps = (dispatch: Dispatch<PersonActions>) => {
     return {
-        sendForm: (item: object) => dispatch(actions.sendForm(item)),
+        sendForm: (form: object) => dispatch(actions.sendForm(form)),
         setLoading: (loading: boolean) => dispatch(actions.setLoading(loading))
     };
 };
@@ -34,13 +35,13 @@ class Form extends React.Component<ReduxType, IState> {
 
         setLoading(true);
         sendForm(this.state.editedForm);
-        this.setState({editedForm: {}});
         setLoading(false);
         console.log('sendClick')
     }
 
     onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({ editedForm: { personNr: e.target.value} });
+        console.log('onchange')
+        this.setState({ editedForm: { personNr: e.target.value }});
     }
 
     render() {
@@ -54,6 +55,7 @@ class Form extends React.Component<ReduxType, IState> {
             <div style={{margin: '20px'}}>
                 <input onChange={this.onInputChange}/>
                 <button onClick={this.onSendClick}>Add</button>
+                <div>{form.personNr} Hej</div>
                 {
                     loading && <p>loading...</p>
                 }
@@ -63,3 +65,5 @@ class Form extends React.Component<ReduxType, IState> {
 }
 
 export default connect(mapStateToProps, mapDispatcherToProps)(Form);
+
+// <Input editedForm={editedForm} updatePersonNr={this.onInputChange}/>
