@@ -2,9 +2,9 @@ import { Constants, PersonActions, IPersonState } from './types';
 
 const init: IPersonState = {
     form: {
-        PersonNr: ''
+        PersonNr: '',
     },
-    loading: false
+    loading: false,
 };
 
 export function personReducer(state: IPersonState = init, 
@@ -16,10 +16,10 @@ action: PersonActions): IPersonState {
                 ...action.payload
             };
         case Constants.SENDFORM:
-                return {
-                    ...state,
-                    form: {...action.payload.form}
-                };
+            return {
+                ...state,
+                form: {...action.payload.form}
+            };
         default:
             return state;
     }

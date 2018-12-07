@@ -53,7 +53,7 @@ class Form extends React.Component<ReduxType, IState> {
                 <div>{form.PersonNr} Hej</div>
                 <button onClick={this.onSendClick}>Add</button>
                 <Input PersonNr={form.PersonNr} updatePersonNr={this.onInputChange}/>
-                <InputBare {this.onInputChange} update={this.onInputChange} />
+                <InputBare {...form} updatePersonNr={this.onInputChange} />
                 {
                     loading && <p>loading...</p>
                 }
