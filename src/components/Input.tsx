@@ -3,21 +3,18 @@ import * as React from "react";
 
 interface Props {
     updatePersonNr: (e: React.ChangeEvent<HTMLInputElement>) => void,
-    editedForm: object
+    PersonNr: string
 }
 
 class Input extends React.Component<Props> {
-    state: Props
     render() {
-        const { editedForm } = this.state;
         return (
             <div>
-                <input/>
+                <input onChange={this.props.updatePersonNr}/>
+                <div>input: {this.props.PersonNr}</div>
             </div>
         );
     }
 }
 
 export default Input;
-
-// <input value={editedForm.personNr} onChange={this.updatePersonNr}/>

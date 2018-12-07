@@ -1,7 +1,7 @@
 import { action } from 'typesafe-actions';
-import { Constants } from './types';
+import { Constants, IForm } from './types';
 
-export function sendForm(form: object) {
+export function sendForm(form: IForm) {
     return action(Constants.SENDFORM, {
         form
     });
