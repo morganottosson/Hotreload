@@ -11,14 +11,15 @@ import { IForm } from '../store/person/types';
 
 const mapDispatcherToProps = (dispatch: Dispatch<PersonActions>) => {
     return {
-        sendForm: (form: IForm) => dispatch(actions.sendForm(form)),
-        setLoading: (loading: boolean) => dispatch(actions.setLoading(loading)),
+        sendForm: (form: IForm) => dispatch<any>(actions.login(form)),
     };
 };
 
+// sendForm: (form: IForm) => dispatch(actions.loginRequest(form)),
+
 const mapStateToProps = ({ person }: IRootState) => {
-    const { form, loading } = person;
-    return { form, loading };
+    const { form, loading, error } = person;
+    return { form, loading, error };
 };
 
 type ReduxType = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatcherToProps>;
@@ -33,11 +34,9 @@ class Form extends React.Component<ReduxType, IState> {
     }
 
     onSendClick = () => {
-        const { sendForm, setLoading } = this.props;
-
-        setLoading(true);
+        const { sendForm } = this.props;
+        console.log('onSendClick')
         sendForm(this.state.editedForm);
-        setLoading(false);
     }
 
     onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +45,7 @@ class Form extends React.Component<ReduxType, IState> {
 
     render() {
         const { form, loading } = this.props;
-
+        console.log(this.props.error)
         return (
             <div style={{margin: '20px'}}>
                 <input onChange={this.onInputChange}/>

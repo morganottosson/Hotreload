@@ -1,50 +1,40 @@
-import { action } from 'typesafe-actions';
-import { Constants, IForm } from './types';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { Dispatch } from 'redux';
+import { IForm } from './types';
 
-export function sendForm(form: IForm) {
-    return action(Constants.SENDFORM, {
-        form
-    });
+export const loginError = (form: IForm) => {
+  return { form, type: 'LOGGED_FAILED' };
 }
 
-/*
-export const sendForm = (form: IForm) => {
+export const loginRequest = (form: IForm) => {
+  return { form, type: 'LOGIN_ATTEMPT' };
+}
+
+export const loginSuccess = (form: IForm) => {
+  return (dispatch: Dispatch) => {
+    dispatch({ form, type: 'LOGGED_SUCCESSFULLY' });
+  };
+}
+
+export const login = (form: IForm)  => {
     return (dispatch: Dispatch) => {
-        dispatch(addTodoStarted())
-        axios.post(`https://localhost:3200`, {
-            form
+        axios.post('http://localhost:3260/getNavet/', {
+            id: form.PersonNr
         })
-        .then(res => {
-            dispatch(addTodoSuccess(res.data))
+        .then((response: AxiosResponse<any>) => {
+            if (response.status >= 200 && response.status < 300) {
+                let returnForm: IForm = {PersonNr: ''}
+                returnForm.PersonNr = response.data.id
+                dispatch({ form, type: 'LOGGED_SUCCESSFULLY' }); 
+            } else {
+                const error = new Error(response.statusText);
+                dispatch({ error, type: 'LOGGED_FAILED' });
+            }
         })
-        .catch(err => {
-            dispatch(addTodoFailure(err.message))
-        })
+        .catch((error) => { 
+            console.log('error object')
+            console.log(error);
+            dispatch({ error, type: 'LOGGED_FAILED' });
+        });
     }
-}
-
-const addTodoSuccess = (form: IForm) => ({
-    type: Constants.ADD_TODO_SUCCESS,
-    payload: {
-      ...form
-    }
-  });
-  
-  const addTodoStarted = () => ({
-    type: Constants.ADD_TODO_STARTED
-  });
-  
-  const addTodoFailure = (error: any) => ({
-    type: Constants.ADD_TODO_FAILURE,
-    payload: {
-      error
-    }
-  });
-*/
-export function setLoading(loading: boolean) {
-    return action(Constants.SET_LOADING, {
-        loading
-    });
 }

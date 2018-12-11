@@ -7,12 +7,15 @@ export interface IForm {
 
 export interface IPersonState {
     form: IForm
-    loading: boolean
+    loading: boolean,
+    error: boolean
 }
 
 export enum Constants {
-    SENDFORM = 'SENDFORM',
-    SET_LOADING = 'SET_LOADING',
+    // SENDFORM = 'SENDFORM',
+    LOGGED_SUCCESSFULLY = 'LOGGED_SUCCESSFULLY',
+    LOGGED_FAILED = 'LOGGED_FAILED',
+    LOGIN_ATTEMPT = 'LOGIN_ATTEMPT',
 }
 
 export type PersonActions = ActionType<typeof actions>;
