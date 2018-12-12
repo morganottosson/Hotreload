@@ -27,7 +27,7 @@ module.exports = {
         },
         port: '8080',
         hot: true,
-        noInfo: true,
+        noInfo: false,
         quiet: false,
         contentBase: resolve(__dirname, 'src'),
         publicPath: '/'

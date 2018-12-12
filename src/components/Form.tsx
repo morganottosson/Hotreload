@@ -54,7 +54,7 @@ class Form extends React.Component<ReduxType, IState> {
                 <Input PersonNr={form.PersonNr} updatePersonNr={this.onInputChange}/>
                 <InputBare {...form} updatePersonNr={this.onInputChange} />
                 {
-                    loading && <p>loading...</p>
+                    loading && <p>loading..</p>
                 }
             </div>
         );
@@ -62,9 +62,3 @@ class Form extends React.Component<ReduxType, IState> {
 }
 
 export default connect(mapStateToProps, mapDispatcherToProps)(Form);
-
-// <Input editedForm={editedForm} updatePersonNr={this.onInputChange}/>
-// <InputBare {...this.onInputChange} />
-// <InputBare {...form.PersonNr} />
-
-//                 <Input PersonNr={form.PersonNr} updatePersonNr={this.onInputChange}/>
