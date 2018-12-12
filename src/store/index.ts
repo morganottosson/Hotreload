@@ -1,8 +1,9 @@
-import { combineReducers, createStore } from 'redux';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
 import { demoReducer } from './demo/reducer';
 import { IDemoState } from './demo/types';
 import { personReducer } from './person/reducer';
 import { IPersonState } from './person/types';
+import thunk from 'redux-thunk';
 
 export interface IRootState {
     demo: IDemoState,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
 });
 
 const store = createStore<IRootState, any, any, any>(
-    rootReducer
+    rootReducer,
+    applyMiddleware(thunk)
 );
 
 export default store;
