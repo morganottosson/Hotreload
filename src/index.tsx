@@ -4,6 +4,7 @@ import App from "./components/App";
 import { Provider, connect } from 'react-redux';
 import store, * as IStore from './store';
 import { IUserState } from "./store/user/types";
+import './assets/css/site.css';
 
 interface IMappedProps {
     user: IUserState;
@@ -21,7 +22,9 @@ class StartPage extends React.Component<IMappedProps, IState> {
 
     render() {
         return (
-            <App user={this.props.user} />
+            <div id="page-wrap">
+                <App user={this.props.user} />
+            </div>
         )
     }
 } 
